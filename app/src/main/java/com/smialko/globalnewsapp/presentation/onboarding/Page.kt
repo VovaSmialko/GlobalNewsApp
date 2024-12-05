@@ -17,8 +17,8 @@ val pages = listOf(
         image = R.drawable.onboarding1
     ),
     Page(
-        title = "Good mood and good vibes for all",
-        description = "You will learn new information about monkeys",
+        title = "Paging 3 — Android pagination, Retrofit and coroutines",
+        description = "Tired of scrolling through that infinite youtube, facebook or instagram feed?",
         image = R.drawable.onboarding2
     ),
     Page(
