@@ -2,8 +2,7 @@ package com.smialko.globalnewsapp.presentation.onboarding
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.smialko.globalnewsapp.domain.usecases.AppEntryUseCases
+import com.smialko.globalnewsapp.domain.usecases.app_entry.AppEntryUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
