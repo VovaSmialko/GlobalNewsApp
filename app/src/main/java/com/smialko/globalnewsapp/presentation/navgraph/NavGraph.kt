@@ -12,6 +12,8 @@ import com.smialko.globalnewsapp.presentation.home.HomeScreen
 import com.smialko.globalnewsapp.presentation.home.HomeViewModel
 import com.smialko.globalnewsapp.presentation.onboarding.OnBoardingScreen
 import com.smialko.globalnewsapp.presentation.onboarding.OnBoardingViewModel
+import com.smialko.globalnewsapp.presentation.search.SearchScreen
+import com.smialko.globalnewsapp.presentation.search.SearchViewModel
 
 @Composable
 fun NavGraph(startDestination: String) {
@@ -36,9 +38,11 @@ fun NavGraph(startDestination: String) {
             startDestination = Route.NewsNavigationScreen.route
         ) {
             composable(route = Route.NewsNavigationScreen.route) {
-                val viewModel: HomeViewModel = hiltViewModel()
-                val articles = viewModel.news.collectAsLazyPagingItems()
-                HomeScreen(articles = articles, navigate = {})
+                val viewModel: SearchViewModel = hiltViewModel()
+                SearchScreen(
+                    state = viewModel.state.value,
+                    event = viewModel::onEvent,
+                    navigate = {})
             }
         }
     }
