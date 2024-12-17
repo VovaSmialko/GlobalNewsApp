@@ -1,4 +1,4 @@
-package com.smialko.globalnewsapp.domain.usecases
+package com.smialko.globalnewsapp.domain.usecases.app_entry
 
 import com.smialko.globalnewsapp.domain.manager.LocalUserManager
 
