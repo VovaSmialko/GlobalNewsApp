@@ -5,13 +5,13 @@ import com.smialko.globalnewsapp.domain.model.Article
 import com.smialko.globalnewsapp.domain.repository.NewsRepository
 import kotlinx.coroutines.flow.Flow
 
-class SelectArticle(
+class SelectArticles(
 
     private val newsRepository: NewsRepository
 ) {
 
 
-    suspend operator fun invoke(url: String): Article? {
-        return newsRepository.selectArticles(url)
+    operator fun invoke(): Flow<List<Article>> {
+        return newsRepository.selectArticle()
     }
 }
