@@ -12,6 +12,7 @@ import com.smialko.globalnewsapp.presentation.bookmark.BookmarkScreen
 import com.smialko.globalnewsapp.presentation.bookmark.BookmarkViewModel
 import com.smialko.globalnewsapp.presentation.home.HomeScreen
 import com.smialko.globalnewsapp.presentation.home.HomeViewModel
+import com.smialko.globalnewsapp.presentation.news_navigator.NewsNavigator
 import com.smialko.globalnewsapp.presentation.onboarding.OnBoardingScreen
 import com.smialko.globalnewsapp.presentation.onboarding.OnBoardingViewModel
 import com.smialko.globalnewsapp.presentation.search.SearchScreen
@@ -40,10 +41,7 @@ fun NavGraph(startDestination: String) {
             startDestination = Route.NewsNavigationScreen.route
         ) {
             composable(route = Route.NewsNavigationScreen.route) {
-                val viewModel: BookmarkViewModel = hiltViewModel()
-                BookmarkScreen(
-                    state = viewModel.state.value,
-                    navigate = {})
+                NewsNavigator()
             }
         }
     }

@@ -14,39 +14,39 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.paging.compose.LazyPagingItems
-import com.smialko.globalnewsapp.domain.model.Article
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.paging.compose.LazyPagingItems
 import com.smialko.globalnewsapp.R
+import com.smialko.globalnewsapp.domain.model.Article
 import com.smialko.globalnewsapp.presentation.Dimens.MediumPadding1
-import com.smialko.globalnewsapp.presentation.common.ArticlesList
-import com.smialko.globalnewsapp.presentation.navgraph.Route
-import com.smialko.newsapp.presentation.common.SearchBar
+import com.smialko.globalnewsapp.presentation.common.ArticleList
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(
-    modifier: Modifier = Modifier,
     articles: LazyPagingItems<Article>,
-    navigate: (String) -> Unit
+    navigateToSearch: () -> Unit,
+    navigateToDetails: (Article) -> Unit
 ) {
+
     val titles by remember {
         derivedStateOf {
             if (articles.itemCount > 10) {
                 articles.itemSnapshotList.items
                     .slice(IntRange(start = 0, endInclusive = 9))
-                    .joinToString(separator = " \uD83d\uDFE5 ") { it.title }
+                    .joinToString(separator = " \uD83D\uDFE5 ") { it.title }
             } else {
                 ""
             }
         }
     }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -64,13 +64,17 @@ fun HomeScreen(
 
         Spacer(modifier = Modifier.height(MediumPadding1))
 
-        SearchBar(
-            modifier = Modifier.padding(horizontal = MediumPadding1),
+        com.smialko.newsapp.presentation.common.SearchBar(
+            modifier = Modifier
+                .padding(horizontal = MediumPadding1)
+                .fillMaxWidth(),
             text = "",
             readOnly = true,
             onValueChange = {},
-            onClick = { navigate(Route.SearchScreen.route) },
-            onSearch = {}
+            onSearch = {},
+            onClick = {
+                navigateToSearch()
+            }
         )
 
         Spacer(modifier = Modifier.height(MediumPadding1))
@@ -85,11 +89,11 @@ fun HomeScreen(
 
         Spacer(modifier = Modifier.height(MediumPadding1))
 
-        ArticlesList(
+        ArticleList(
             modifier = Modifier.padding(horizontal = MediumPadding1),
             articles = articles,
-            onclick = {
-                navigate(Route.DetailsScreen.route)
+            onClick = {
+                navigateToDetails(it)
             }
         )
     }
